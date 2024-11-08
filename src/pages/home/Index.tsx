@@ -27,10 +27,9 @@ export function Home() {
 
     return (
         <div className="d-block mt-2 ">
-            <div className='row'>
-                <div className="col-4">
-                    <h2 className="text-start">Do Not Forget!</h2>
-                    <div className="input-group mb-3">
+            <div className="container">
+                    <h2 className="text-start text-secondary">Do Not Forget!</h2>
+                    <div className="input-group mb-5">
                         <input
                             type="text"
                             className="form-control"
@@ -50,7 +49,6 @@ export function Home() {
                         )
                     }
                 </div>
-            </div>
         </div>
 
     )

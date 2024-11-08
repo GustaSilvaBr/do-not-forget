@@ -27,8 +27,8 @@ export function TodoList(props: { setSelectedTodo: (selectedTodo: ITodoItem) => 
     return (
 
         <ul className="list-group">
-            {todos.map(todo => (
-                <TodoItem todoItem={todo} handleSelectTodo={props.setSelectedTodo} />
+            {todos.map((todo,index) => (
+                <TodoItem key={index + todo.id} todoItem={todo} handleSelectTodo={props.setSelectedTodo} />
             ))}
         </ul>
     );

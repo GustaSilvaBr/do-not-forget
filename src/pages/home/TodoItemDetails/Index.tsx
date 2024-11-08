@@ -1,5 +1,5 @@
-import {db} from '../../../config/db';
-import {doc, setDoc} from 'firebase/firestore';
+import { db } from '../../../config/db';
+import { doc, setDoc } from 'firebase/firestore';
 import { ITodoItem } from '../../../interfaces/ITodoItem';
 
 interface TodoDetailsProps {
@@ -10,44 +10,54 @@ interface TodoDetailsProps {
 
 export function TodoDetails(props: TodoDetailsProps) {
 
-  function handleSaveDescription(){
+  function handleSaveDescription() {
     //save into database
-    updateTodoIntoDataBase().then(()=>{
+    updateTodoIntoDataBase().then(() => {
       props.onBackToList();
-    }).catch(()=>{
+    }).catch(() => {
       alert("Não foi salvo");
     });
     //comeback
-    
+
   }
 
 
-  async function updateTodoIntoDataBase(){
+  async function updateTodoIntoDataBase() {
     const newDesc = (document.getElementById(`desc-id-${props.todoSelected.id}`) as HTMLTextAreaElement).value
     await setDoc(doc(db, "todos", props.todoSelected.id.toString()), {
-      ... props.todoSelected,
+      ...props.todoSelected,
       description: newDesc,
     });
   }
 
 
   return (
-    <div className="todo-details-wrapper">
-      <h4>{props.todoSelected.text}</h4>
+    <div className="todo-details-wrapper ">
+      <div className='d-flex justify-content-start align-items-bottom gap-4'>
+        <button onClick={props.onBackToList} className='btn btn-sm btn-outline-secondary'>
+          back
+        </button>
+        <h4 style={{ margin: "0px" }}>{props.todoSelected.text}</h4>
+      </div>
+
       <textarea
         id={`desc-id-${props.todoSelected.id}`}
         className="form-control mt-3"
-        rows={20}
+        rows={10}
         cols={30}
         placeholder="Add a detailed description..."
-        value={props.todoSelected.description}
+        defaultValue={props.todoSelected.description}
+
       ></textarea>
-      <button
-        className="btn btn-primary mt-3"
-        onClick={handleSaveDescription}
-      >
-        Save Description
-      </button>
+      <div className='d-flex justify-content-start align-item-center'>
+        <button
+          className="btn btn-primary mt-3"
+          onClick={handleSaveDescription}
+        >
+          Save Description
+        </button>
+      </div>
+
     </div>
   );
 }
