@@ -1,0 +1,7 @@
+.todo-item{
+    cursor: pointer;
+}
+.todo-item:hover{
+   background-color: #f0f0f0;
+   transition: background-color 0.4s ease
+}
