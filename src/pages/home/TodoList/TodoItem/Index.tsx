@@ -1,19 +1,31 @@
-import {ITodoItem } from '../../../../interfaces/ITodoItem';
+import { updateTodoIntoDataBase } from '../../../../services/todosServices';
+import { ITodoItem } from '../../../../interfaces/ITodoItem';
+import {deleteTodoFromDataBase} from '../../../../services/todosServices';
 import './styles.css';
 
 interface TodoItemPropsInterface {
     todoItem: ITodoItem
-    handleSelectTodo: (todoItem: ITodoItem)=>void,
+    handleSelectTodo: (todoItem: ITodoItem) => void,
 }
 
 export function TodoItem(props: TodoItemPropsInterface) {
 
-    function toggleComplete(){
-        //atualizar no banco
+    function toggleComplete() {
+        updateTodoIntoDataBase({
+            ...props.todoItem,
+            completed:!props.todoItem.completed,
+        }).then().catch(() => {
+            alert("Não foi salvo");
+        });
     }
 
-    function handleDelete(){
-        //deletar no banco
+    function handleDelete() {
+        const response = prompt("Do you REALLY want to delete it? (y/n)");
+        if(response && response.toUpperCase().trim()=="Y"){
+            deleteTodoFromDataBase(props.todoItem.id.toString()).then().catch(() => {
+                alert("Não foi salvo");
+            });
+        }
     }
 
 

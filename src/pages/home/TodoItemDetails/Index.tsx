@@ -1,5 +1,4 @@
-import { db } from '../../../config/db';
-import { doc, setDoc } from 'firebase/firestore';
+import {updateTodoIntoDataBase} from '../../../services/todosServices';
 import { ITodoItem } from '../../../interfaces/ITodoItem';
 
 interface TodoDetailsProps {
@@ -11,25 +10,19 @@ interface TodoDetailsProps {
 export function TodoDetails(props: TodoDetailsProps) {
 
   function handleSaveDescription() {
-    //save into database
-    updateTodoIntoDataBase().then(() => {
+    const newDesc = (document.getElementById(`desc-id-${props.todoSelected.id}`) as HTMLTextAreaElement).value
+
+    const todoToSave = {
+      ... props.todoSelected,
+      description: newDesc,
+    }
+    
+    updateTodoIntoDataBase(todoToSave).then(() => {
       props.onBackToList();
     }).catch(() => {
       alert("Não foi salvo");
     });
-    //comeback
-
   }
-
-
-  async function updateTodoIntoDataBase() {
-    const newDesc = (document.getElementById(`desc-id-${props.todoSelected.id}`) as HTMLTextAreaElement).value
-    await setDoc(doc(db, "todos", props.todoSelected.id.toString()), {
-      ...props.todoSelected,
-      description: newDesc,
-    });
-  }
-
 
   return (
     <div className="todo-details-wrapper ">
