@@ -5,8 +5,6 @@ import { collection, query, onSnapshot } from 'firebase/firestore';
 import { ITodoItem } from '../../../interfaces/ITodoItem';
 import { TodoItem } from './TodoItem/Index';
 
-
-
 export function TodoList(props: { setSelectedTodo: (selectedTodo: ITodoItem) => void }) {
     const [todos, setTodos] = useState<ITodoItem[]>([]);
 
@@ -26,11 +24,12 @@ export function TodoList(props: { setSelectedTodo: (selectedTodo: ITodoItem) => 
     }, []);
 
     return (
-
-        <ul className="list-group">
-            {todos.map((todo, index) => (
-                <TodoItem key={index + todo.id} todoItem={todo} handleSelectTodo={props.setSelectedTodo} />
-            ))}
-        </ul>
+        <div className="todo-list-wrapper">
+            <ul className="list-group">
+                {todos.map((todo, index) => (
+                    <TodoItem key={index + todo.id} todoItem={todo} handleSelectTodo={props.setSelectedTodo} />
+                ))}
+            </ul>
+        </div>
     );
 };

@@ -1,7 +1,19 @@
-.todo-item{
+.todo-item {
     cursor: pointer;
 }
-.todo-item:hover{
-   background-color: #f0f0f0;
-   transition: background-color 0.4s ease
+
+.todo-item:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.4s ease;
+}
+
+.todo-item-description {
+    font-size: 0.85em;
+    color: #6c757d; /* muted color */
+    margin-top: 2px;
+}
+
+span.item-title{
+    display: block;
+    text-align: start;
 }
