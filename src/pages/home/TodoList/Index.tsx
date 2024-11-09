@@ -11,23 +11,24 @@ export function TodoList(props: { setSelectedTodo: (selectedTodo: ITodoItem) => 
     const [todos, setTodos] = useState<ITodoItem[]>([]);
 
     useEffect(() => {
-        const q = query(collection(db, "todos"));
-        return onSnapshot(q, (querySnapshot) => {
-            const todosFromDB: ITodoItem[] = [];
-            querySnapshot.forEach((doc) => {
-                todosFromDB.push(doc.data() as ITodoItem);
+        try {
+            const q = query(collection(db, "todos"));
+            return onSnapshot(q, (querySnapshot) => {
+                const todosFromDB: ITodoItem[] = [];
+                querySnapshot.forEach((doc) => {
+                    todosFromDB.push(doc.data() as ITodoItem);
+                });
+                setTodos(todosFromDB);
             });
-            setTodos(todosFromDB);
-        });
+        } catch (err) {
+            console.error(err);
+        }
     }, []);
-
-    
-
 
     return (
 
         <ul className="list-group">
-            {todos.map((todo,index) => (
+            {todos.map((todo, index) => (
                 <TodoItem key={index + todo.id} todoItem={todo} handleSelectTodo={props.setSelectedTodo} />
             ))}
         </ul>

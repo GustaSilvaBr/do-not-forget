@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ITodoItem } from '../../interfaces/ITodoItem';
 import { TodoDetails } from './TodoItemDetails/Index';
 import { TodoList } from './TodoList/Index';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../config/db';
 
 export function Home() {
@@ -22,7 +22,7 @@ export function Home() {
     };
 
     async function addTodo(todo: ITodoItem) {
-        await addDoc(collection(db, "todos"), todo);
+        await setDoc(doc(db, "todos", todo.id.toString()), todo);
     }
 
     return (
