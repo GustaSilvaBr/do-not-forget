@@ -29,20 +29,7 @@ export function TodoList() {
 
     return (
         <div className='todo-list-page page'>
-            <img onClick={handleAddTodo} className='mb-4 orb' width={'auto'} height={'55px'} src={orbAnimated} alt="" />
-            {/* <h2 className="text-start text-secondary">Do Not Forget!</h2>
-            <div className="input-group mb-5">
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Add a new task"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                />
-                <button className="btn btn-primary" onClick={handleAddTodo}>
-                    Add
-                </button>
-            </div> */}
+          
             <div className="todo-list-wrapper">
                 <ul className="list-group">
                     {todos.map((todo, index) => (
@@ -50,6 +37,9 @@ export function TodoList() {
                     ))}
                 </ul>
             </div>
+
+            <img onClick={handleAddTodo} className='mt-4 orb' width={'auto'} height={'60px'} src={orbAnimated} alt="" />
+
         </div>
 
     );
