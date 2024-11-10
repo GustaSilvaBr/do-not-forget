@@ -1,35 +1,36 @@
 import {  useEffect, useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 import './styles.css'; 
 
 import { ITodoItem } from '../../interfaces/ITodoItem';
 import { TodoItem } from './TodoItem/Index';
 import {addTodo, getTodos} from '../../services/todosServices'
+import orbAnimated from '../../assets/orb.gif';
 
 export function TodoList() {
     const [todos, setTodos] = useState<ITodoItem[]>([]);
-    const [inputValue, setInputValue] = useState<string>('');
-
+    const navigate = useNavigate();
     useEffect(()=>{
         return getTodos({setTodos});
     },[]);
 
     const handleAddTodo = () => {
-        if (inputValue.trim() === '') return;
-
         const newTodo: ITodoItem = {
             id: Date.now(),
-            text: inputValue,
+            text: '',
             description: '',
             completed: false,
         };
         addTodo(newTodo);
-        setInputValue('');
+        return navigate(`/todos/${newTodo.id}`)
     };
+
 
 
     return (
         <div className='todo-list-page page'>
-            <h2 className="text-start text-secondary">Do Not Forget!</h2>
+            <img onClick={handleAddTodo} className='mb-4 orb' width={'auto'} height={'55px'} src={orbAnimated} alt="" />
+            {/* <h2 className="text-start text-secondary">Do Not Forget!</h2>
             <div className="input-group mb-5">
                 <input
                     type="text"
@@ -41,7 +42,7 @@ export function TodoList() {
                 <button className="btn btn-primary" onClick={handleAddTodo}>
                     Add
                 </button>
-            </div>
+            </div> */}
             <div className="todo-list-wrapper">
                 <ul className="list-group">
                     {todos.map((todo, index) => (
