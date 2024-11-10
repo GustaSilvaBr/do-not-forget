@@ -1,0 +1,41 @@
+.todo-item {
+    cursor: pointer;
+    margin-bottom: 15px;
+
+    padding: 10px;
+    height: 100px;
+    background-color: #fff;
+
+    border-radius:5px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    justify-content: left;
+    justify-items: left;
+    align-items: center;
+
+}
+
+.todo-item:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.4s ease;
+}
+
+.todo-item-description {
+    font-size: 0.85em;
+    color: #6c757d; /* muted color */   
+    font-weight: 600;
+}
+
+.date{
+    font-size: 0.85em;
+    color: #6c757d; /* muted color */   
+}
+
+span.item-title{
+    color: #4f4f4f;
+    display: block;
+    text-align: start;
+    font-weight: bold;
+}

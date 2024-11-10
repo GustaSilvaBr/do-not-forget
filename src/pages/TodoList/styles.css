@@ -1,3 +1,7 @@
+div.todo-list-page{
+  background-color: #F7F7F7;
+}
+
 .container {
   max-width: 700px;
   margin: auto;
@@ -8,9 +12,19 @@
 }
 
 .todo-list-wrapper {
-  max-height: 80vh; /* Set max height relative to viewport */
-  overflow-y: auto;
+  max-height: 60vh; /* Set max height relative to viewport */
+  overflow-y: scroll; /* Enable scrolling */
   padding-right: 5px; /* Optional: Adds some space for scrollbar visibility */
+}
+
+/* Hide the scrollbar */
+.todo-list-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.todo-list-wrapper {
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  scrollbar-width: none;  /* For Firefox */
 }
 
 .list-group-item {
@@ -26,7 +40,6 @@
 
 .todo-details-wrapper {
   width: 100%;
-  margin-top: 1rem;
 }
 
 button.back-button {
