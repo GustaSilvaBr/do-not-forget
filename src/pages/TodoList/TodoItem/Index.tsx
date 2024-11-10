@@ -13,9 +13,9 @@ export function TodoItem(props: TodoItemPropsInterface) {
     return (
         <li
             key={props.todoItem.id}
-            className={`todo-item ${props.todoItem.completed ? 'list-group-item-success' : ''}`}
+            
         >
-            <Link to={`/todos/${props.todoItem.id}`}>
+            <Link className={`todo-item ${props.todoItem.completed ? 'list-group-item-success' : ''}`} to={`/todos/${props.todoItem.id}`}>
                 <span className='item-title' style={{ textDecoration: props.todoItem.completed ? 'line-through' : 'none' }}>
                     {props.todoItem.text}
                 </span>
